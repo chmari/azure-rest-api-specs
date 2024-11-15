@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Key Vault",
+    "title": "KeyVaultClient",
     "version": "7.5",
     "description": "The key vault client performs cryptographic key operations and vault operations\nagainst the Key Vault service.",
     "x-typespec-generated": [
@@ -66,7 +66,7 @@
             "description": "The scope of the role assignments.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "$filter",
@@ -86,13 +86,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -120,7 +114,7 @@
             "description": "The scope of the role assignment.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "roleAssignmentName",
@@ -140,13 +134,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -169,7 +157,7 @@
             "description": "The scope of the role assignment to create.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "roleAssignmentName",
@@ -198,13 +186,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -227,7 +209,7 @@
             "description": "The scope of the role assignment to delete.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "roleAssignmentName",
@@ -247,13 +229,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -278,7 +254,7 @@
             "description": "The scope of the role definition.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "$filter",
@@ -298,13 +274,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -332,7 +302,7 @@
             "description": "The scope of the role definition to get. Managed HSM only supports '/'.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "roleDefinitionName",
@@ -352,13 +322,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -378,10 +342,10 @@
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the role definition to create or update. Managed HSM only supports\n'/'.",
+            "description": "The scope of the role definition to create or update. Managed HSM only supports '/'.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "roleDefinitionName",
@@ -410,13 +374,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -439,7 +397,7 @@
             "description": "The scope of the role definition to delete. Managed HSM only supports '/'.",
             "required": true,
             "type": "string",
-            "format": "uri"
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "roleDefinitionName",
@@ -459,13 +417,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -515,13 +467,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -562,13 +508,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -625,13 +565,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -685,13 +619,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -732,13 +660,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
@@ -786,7 +708,7 @@
         }
       }
     },
-    "/settings/{settingName}": {
+    "/settings/{setting-name}": {
       "get": {
         "operationId": "GetSetting",
         "summary": "Get specified account setting object.",
@@ -796,11 +718,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "settingName",
+            "name": "setting-name",
             "in": "path",
             "description": "The name of the account setting. Must be a valid settings option.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "settingName"
           }
         ],
         "responses": {
@@ -813,13 +736,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         }
@@ -833,11 +750,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "settingName",
+            "name": "setting-name",
             "in": "path",
             "description": "The name of the account setting. Must be a valid settings option.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "settingName"
           },
           {
             "name": "parameters",
@@ -859,13 +777,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },

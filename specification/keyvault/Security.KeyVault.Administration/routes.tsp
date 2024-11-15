@@ -12,12 +12,11 @@ using Azure.ClientGenerator.Core;
 
 namespace KeyVault;
 
-alias KeyVaultOperations = StandardResourceOperations;
-
 /**
  * Returns the status of full backup operation
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @route("/backup/{jobId}/pending")
 @get
 op fullBackupStatus is Azure.Core.Foundations.Operation<
@@ -28,7 +27,9 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  FullBackupOperation
+  FullBackupOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -69,7 +70,9 @@ op fullBackup is Azure.Core.Foundations.Operation<
      * The backup operation.
      */
     @body response: FullBackupOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -108,13 +111,16 @@ op preFullBackup is Azure.Core.Foundations.Operation<
      * The backup operation.
      */
     @body response: FullBackupOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
  * Returns the status of restore operation
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @route("/restore/{jobId}/pending")
 @get
 op restoreStatus is Azure.Core.Foundations.Operation<
@@ -125,7 +131,9 @@ op restoreStatus is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  RestoreOperation
+  RestoreOperation,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -164,7 +172,9 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: RestoreOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -202,7 +212,9 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: RestoreOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -250,7 +262,9 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: SelectiveKeyRestoreOperation;
-  }
+  },
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -258,12 +272,13 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates key vault account setting, stores it, then returns the setting name and value to the client.")
-@route("/settings/{settingName}")
+@route("/settings/{setting-name}")
 @patch
 op updateSetting is Azure.Core.Foundations.Operation<
   {
     /** The name of the account setting. Must be a valid settings option. */
-    @path settingName: string;
+    @path("setting-name")
+    settingName: string;
 
     /**
      * The parameters to update an account setting.
@@ -273,7 +288,9 @@ op updateSetting is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: UpdateSettingRequest;
   },
-  Setting
+  Setting,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -281,14 +298,17 @@ op updateSetting is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get specified account setting object.")
-@route("/settings/{settingName}")
+@route("/settings/{setting-name}")
 @get
 op getSetting is Azure.Core.Foundations.Operation<
   {
     /** The name of the account setting. Must be a valid settings option. */
-    @path settingName: string;
+    @path("setting-name")
+    settingName: string;
   },
-  Setting
+  Setting,
+  {},
+  KeyVaultError
 >;
 
 /**
@@ -305,15 +325,14 @@ interface RoleDefinitions {
   /**
    * Deletes a custom role definition.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role definition to delete. Managed HSM only supports '/'.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The name (GUID) of the role definition to delete.
@@ -321,22 +340,22 @@ interface RoleDefinitions {
       @path
       roleDefinitionName: string;
     },
-    RoleDefinition
+    RoleDefinition,
+    {},
+    KeyVaultError
   >;
 
   /**
    * Creates or updates a custom role definition.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       /**
-       * The scope of the role definition to create or update. Managed HSM only supports
-       * '/'.
+       * The scope of the role definition to create or update. Managed HSM only supports '/'.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The name of the role definition to create or update. It can be any valid GUID.
@@ -350,21 +369,22 @@ interface RoleDefinitions {
       @body
       parameters: RoleDefinitionCreateParameters;
     },
-    CreatedResponse & RoleDefinition
+    CreatedResponse & RoleDefinition,
+    {},
+    KeyVaultError
   >;
 
   /**
    * Get the specified role definition.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role definition to get. Managed HSM only supports '/'.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The name of the role definition to get.
@@ -372,21 +392,22 @@ interface RoleDefinitions {
       @path
       roleDefinitionName: string;
     },
-    RoleDefinition
+    RoleDefinition,
+    {},
+    KeyVaultError
   >;
 
   /**
    * Get all role definitions that are applicable at scope and above.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role definition.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search
@@ -395,7 +416,9 @@ interface RoleDefinitions {
       @query("$filter")
       $filter?: string;
     },
-    RoleDefinitionListResult
+    RoleDefinitionListResult,
+    {},
+    KeyVaultError
   >;
 }
 
@@ -404,15 +427,14 @@ interface RoleAssignments {
   /**
    * Deletes a role assignment.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role assignment to delete.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The name of the role assignment to delete.
@@ -420,21 +442,22 @@ interface RoleAssignments {
       @path
       roleAssignmentName: string;
     },
-    RoleAssignment
+    RoleAssignment,
+    {},
+    KeyVaultError
   >;
 
   /**
    * Creates a role assignment.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @put
   create is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role assignment to create.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The name of the role assignment to create. It can be any valid GUID.
@@ -448,21 +471,22 @@ interface RoleAssignments {
       @body
       parameters: RoleAssignmentCreateParameters;
     },
-    CreatedResponse & RoleAssignment
+    CreatedResponse & RoleAssignment,
+    {},
+    KeyVaultError
   >;
 
   /**
    * Get the specified role assignment.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role assignment.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The name of the role assignment to get.
@@ -470,21 +494,22 @@ interface RoleAssignments {
       @path
       roleAssignmentName: string;
     },
-    RoleAssignment
+    RoleAssignment,
+    {},
+    KeyVaultError
   >;
 
   /**
    * Gets role assignments for a scope.
    */
-  @route("/{scope}/providers/Microsoft.Authorization/roleAssignments")
+  @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
   listForScope is Azure.Core.Foundations.Operation<
     {
       /**
        * The scope of the role assignments.
        */
-      @path
-      scope: url;
+      scope: string;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role
@@ -494,6 +519,8 @@ interface RoleAssignments {
       @query("$filter")
       $filter?: string;
     },
-    RoleAssignmentListResult
+    RoleAssignmentListResult,
+    {},
+    KeyVaultError
   >;
 }
