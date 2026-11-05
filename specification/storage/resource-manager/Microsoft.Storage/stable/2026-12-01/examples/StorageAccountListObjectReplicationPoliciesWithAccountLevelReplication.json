@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "accountName": "src1122",
+    "api-version": "2026-12-01",
+    "resourceGroupName": "res7687",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+            "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/src1122/objectReplicationPolicies/b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+            "properties": {
+              "accountLevelReplication": {
+                "enabled": true,
+                "filters": {
+                  "minCreationTime": "2025-01-01T00:00:00Z",
+                  "prefixExclude": [
+                    "exact-container-name/",
+                    "container-name-prefix"
+                  ]
+                },
+                "ruleId": "69eb9f4a-f3eb-48d7-9d3b-e14d606be1cf"
+              },
+              "destinationAccount": "dst112",
+              "enabledTime": "2026-12-01T03:01:55Z",
+              "policyId": "b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+              "sourceAccount": "src1122"
+            }
+          },
+          {
+            "name": "2a20bb73-5717-4635-985a-5d4cf777438f",
+            "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/src1122/objectReplicationPolicies/2a20bb73-5717-4635-985a-5d4cf777438f",
+            "properties": {
+              "destinationAccount": "dst112",
+              "policyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
+              "rules": [
+                {
+                  "destinationContainer": "dcont139",
+                  "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
+                  "sourceContainer": "scont139"
+                }
+              ],
+              "sourceAccount": "src1122"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ObjectReplicationPolicies_List",
+  "title": "StorageAccountListObjectReplicationPoliciesWithAccountLevelReplication"
+}

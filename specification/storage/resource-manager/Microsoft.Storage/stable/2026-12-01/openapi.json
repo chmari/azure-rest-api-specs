@@ -6931,6 +6931,9 @@
         "x-ms-examples": {
           "StorageAccountListObjectReplicationPolicies": {
             "$ref": "./examples/StorageAccountListObjectReplicationPolicies.json"
+          },
+          "StorageAccountListObjectReplicationPoliciesWithAccountLevelReplication": {
+            "$ref": "./examples/StorageAccountListObjectReplicationPoliciesWithAccountLevelReplication.json"
           }
         },
         "x-ms-pageable": {
@@ -6991,6 +6994,9 @@
         "x-ms-examples": {
           "StorageAccountGetObjectReplicationPolicies": {
             "$ref": "./examples/StorageAccountGetObjectReplicationPolicy.json"
+          },
+          "StorageAccountGetObjectReplicationPolicyWithAccountLevelReplication": {
+            "$ref": "./examples/StorageAccountGetObjectReplicationPolicyWithAccountLevelReplication.json"
           }
         }
       },
@@ -7059,11 +7065,23 @@
           "StorageAccountCreateObjectReplicationPolicyOnSource": {
             "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnSource.json"
           },
+          "StorageAccountCreateObjectReplicationPolicyWithAccountLevelReplicationOnDestination": {
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyWithAccountLevelReplicationOnDestination.json"
+          },
+          "StorageAccountCreateObjectReplicationPolicyWithAccountLevelReplicationOnSource": {
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyWithAccountLevelReplicationOnSource.json"
+          },
           "StorageAccountUpdateObjectReplicationPolicyOnDestination": {
             "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnDestination.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnSource": {
             "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnSource.json"
+          },
+          "StorageAccountUpdateObjectReplicationPolicyWithAccountLevelReplicationOnDestination": {
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyWithAccountLevelReplicationOnDestination.json"
+          },
+          "StorageAccountUpdateObjectReplicationPolicyWithAccountLevelReplicationOnSource": {
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyWithAccountLevelReplicationOnSource.json"
           }
         }
       },
@@ -15425,6 +15443,24 @@
         }
       ]
     },
+    "ObjectReplicationPolicyAccountLevelReplicationFilter": {
+      "type": "object",
+      "description": "Filters that exclude containers and limit blob creation time for account-level object replication.",
+      "properties": {
+        "prefixExclude": {
+          "type": "array",
+          "description": "Container names or prefixes to exclude from replication. Use a trailing slash to match an exact container name, for example 'exact-container-name/', or omit the slash to match a container name prefix, for example 'container-name-prefix'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minCreationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Blobs created after this time will be replicated to the destination. The value is in RFC 3339 format, for example '2025-01-01T00:00:00Z'."
+        }
+      }
+    },
     "ObjectReplicationPolicyFilter": {
       "type": "object",
       "description": "Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters.",
@@ -15484,12 +15520,34 @@
         "tagsReplication": {
           "$ref": "#/definitions/ObjectReplicationPolicyPropertiesTagsReplication",
           "description": "Optional. The object replication policy tags replication feature options."
+        },
+        "accountLevelReplication": {
+          "$ref": "#/definitions/ObjectReplicationPolicyPropertiesAccountLevelReplication",
+          "description": "Optional. The account-level object replication settings."
         }
       },
       "required": [
         "sourceAccount",
         "destinationAccount"
       ]
+    },
+    "ObjectReplicationPolicyPropertiesAccountLevelReplication": {
+      "type": "object",
+      "description": "The account-level object replication settings between two storage accounts.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Rule ID is auto-generated for a new account-level replication rule on the destination account. It is required when setting the policy on the source account."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether account-level object replication is enabled for the policy."
+        },
+        "filters": {
+          "$ref": "#/definitions/ObjectReplicationPolicyAccountLevelReplicationFilter",
+          "description": "Filters that limit account-level object replication."
+        }
+      }
     },
     "ObjectReplicationPolicyPropertiesMetrics": {
       "type": "object",

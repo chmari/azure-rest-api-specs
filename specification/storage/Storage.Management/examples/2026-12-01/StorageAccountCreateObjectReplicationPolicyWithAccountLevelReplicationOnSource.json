@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "accountName": "src1122",
+    "api-version": "2026-12-01",
+    "objectReplicationPolicyId": "b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+    "properties": {
+      "properties": {
+        "accountLevelReplication": {
+          "enabled": true,
+          "filters": {
+            "minCreationTime": "2025-01-01T00:00:00Z",
+            "prefixExclude": [
+              "exact-container-name/",
+              "container-name-prefix"
+            ]
+          },
+          "ruleId": "69eb9f4a-f3eb-48d7-9d3b-e14d606be1cf"
+        },
+        "destinationAccount": "dst112",
+        "sourceAccount": "src1122"
+      }
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+        "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/src1122/objectReplicationPolicies/b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+        "properties": {
+          "accountLevelReplication": {
+            "enabled": true,
+            "filters": {
+              "minCreationTime": "2025-01-01T00:00:00Z",
+              "prefixExclude": [
+                "exact-container-name/",
+                "container-name-prefix"
+              ]
+            },
+            "ruleId": "69eb9f4a-f3eb-48d7-9d3b-e14d606be1cf"
+          },
+          "destinationAccount": "dst112",
+          "enabledTime": "2026-12-01T03:01:55Z",
+          "policyId": "b7dd18e6-dbdc-4902-96e6-945371ea96a8",
+          "sourceAccount": "src1122"
+        }
+      }
+    }
+  },
+  "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
+  "title": "StorageAccountCreateObjectReplicationPolicyWithAccountLevelReplicationOnSource"
+}

@@ -5535,6 +5535,12 @@ model ObjectReplicationPolicyProperties {
    */
   @added(Versions.v2025_08_01)
   tagsReplication?: ObjectReplicationPolicyPropertiesTagsReplication;
+
+  /**
+   * Optional. The account-level object replication settings.
+   */
+  @added(Versions.v2026_12_01)
+  accountLevelReplication?: ObjectReplicationPolicyPropertiesAccountLevelReplication;
 }
 
 /**
@@ -5606,6 +5612,43 @@ model ObjectReplicationPolicyPropertiesTagsReplication {
    * Indicates whether object replication tags replication feature is enabled for the policy.
    */
   enabled?: boolean;
+}
+
+/**
+ * The account-level object replication settings between two storage accounts.
+ */
+@added(Versions.v2026_12_01)
+model ObjectReplicationPolicyPropertiesAccountLevelReplication {
+  /**
+   * Rule ID is auto-generated for a new account-level replication rule on the destination account. It is required when setting the policy on the source account.
+   */
+  ruleId?: string;
+
+  /**
+   * Indicates whether account-level object replication is enabled for the policy.
+   */
+  enabled?: boolean;
+
+  /**
+   * Filters that limit account-level object replication.
+   */
+  filters?: ObjectReplicationPolicyAccountLevelReplicationFilter;
+}
+
+/**
+ * Filters that exclude containers and limit blob creation time for account-level object replication.
+ */
+@added(Versions.v2026_12_01)
+model ObjectReplicationPolicyAccountLevelReplicationFilter {
+  /**
+   * Container names or prefixes to exclude from replication. Use a trailing slash to match an exact container name, for example 'exact-container-name/', or omit the slash to match a container name prefix, for example 'container-name-prefix'.
+   */
+  prefixExclude?: string[];
+
+  /**
+   * Blobs created after this time will be replicated to the destination. The value is in RFC 3339 format, for example '2025-01-01T00:00:00Z'.
+   */
+  minCreationTime?: utcDateTime;
 }
 
 /**
